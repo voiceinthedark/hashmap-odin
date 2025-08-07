@@ -7,6 +7,8 @@
 class Hashmap{
   #capacity;
   #load_factor;
+  #size;
+  #buckets; // the buckets of the hashmap
   /**
    * @constructor
    * @description hashmap takes a capacity (default 16) and a load_factor (default 0.8)
@@ -14,12 +16,15 @@ class Hashmap{
    * @param {number} [load_factor=0.8] 
    * */
   constructor(capacity = 16, load_factor = 0.8){
-    this.#capacity = capacity
+    this.#capacity = capacity // starts at 16
     this.#load_factor = load_factor
+    this.#size = 0 // initially at 0 size
+    this.#buckets = new Array(this.#capacity);
   }
 
   /**
    * @method to return the capacity of the hashmap
+   * @returns {number}
    * */
   get capacity(){
     return this.#capacity
@@ -27,9 +32,18 @@ class Hashmap{
 
   /**
    * @method to return the load factor of the hashmap (percentage to grow the hashmap)
+   * @returns {number}
    * */
   get load_factor(){
     return this.#load_factor
+  }
+
+  /**
+   * @method to return the size of the hashmap
+   * @returns {number}
+   * */
+  get size(){
+    return this.#size
   }
 
   /**
@@ -53,8 +67,9 @@ class Hashmap{
    * */
   set(key, value){
     // TODO: handle growth
-    //
     // Implement the set method
+
+
   }
 
   /**
