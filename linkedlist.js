@@ -40,9 +40,10 @@ class LinkedList {
 
   /**
      * @method to add a value to the front of the list
+     * @param {string} key 
      * @param {any} val  */
-  append(val) {
-    const newNode = new Node(val, null);
+  append(key, val) {
+    const newNode = new Node(key, val, null);
     if (!this.#head) {
       this.#head = newNode;
       this.#tail = newNode;
@@ -55,19 +56,19 @@ class LinkedList {
     }
     this.#size++;
     this.#currentNode = this.#tail; // Keep currentNode pointing to the last added element if it serves a purpose
-
   }
 
   /**
    * @method to add a value to the front of the list
+   * @param {string} key 
    * @param {any} val 
    * */
-  prepend(val) {
+  prepend(key, val) {
     if (!this.#head) {
-      this.append(val);
+      this.append(key, val);
     } else {
       const prevNode = this.#head;
-      this.#head = new Node(val, prevNode);
+      this.#head = new Node(key, val, prevNode);
       this.#size++
     }
   }
@@ -75,6 +76,7 @@ class LinkedList {
   /** 
    * @method to get the node at the index
    * @param {number} index
+   * @returns {Node | null | undefined}
    * */
   at(index) {
     if (index < 0 || index >= this.#size) {
@@ -87,12 +89,12 @@ class LinkedList {
       current = current?.nextNode;
       i++;
     }
-    return current?.value;
+    return current;
   }
 
   /** 
    * @method to remove and return the last element in the list
-   * @returns {any | null}
+   * @returns {Node | null | undefined}
    * */
   pop() {
     if (!this.#head) {
@@ -101,7 +103,7 @@ class LinkedList {
       return null;
     }
 
-    const valueToReturn = this.#tail?.value; // Get the value of the last node before removal
+    const valueToReturn = this.#tail; // Get the value of the last node before removal
 
     if (this.#size === 1) {
       // If there's only one node, clear the list
@@ -125,10 +127,10 @@ class LinkedList {
 
   /**
    * @method to check whether a value exists in the list
-   * @param {any} val 
+   * @param {any} key 
    * @returns {boolean}
    * */
-  contains(val) {
+  contains(key) {
     if (!this.#head) {
       return false;
     } else {
@@ -136,7 +138,7 @@ class LinkedList {
       if (this.#currentNode) {
         while (this.#currentNode !== null) {
           console.log(`node: ${this.#currentNode?.value}`)
-          if (this.#currentNode?.value === val) {
+          if (this.#currentNode?.key === key) {
             return true
           }
           this.#currentNode = this.#currentNode?.nextNode
@@ -147,17 +149,17 @@ class LinkedList {
   }
 
   /** search the linked list for the val and return the index or null
-   * @param {any} val 
+   * @param {any} key 
    * @returns {any}
    * */
-  find(val) {
+  find(key) {
     if (!this.#head) {
       return null
     }
     let current = this.#head;
     let i = 0;
     while (current !== null) {
-      if (current.value === val) {
+      if (current.key === key) {
         return i
       }
       current = current.nextNode;
@@ -168,10 +170,11 @@ class LinkedList {
 
   /**
    * @method to insert a node value at index location
+   * @param {string} key 
    * @param {any} value 
    * @param {number} index
    * */
-  insertAt(value, index) {
+  insertAt(key, value, index) {
     // 1. Handle invalid index (negative or beyond the current size)
     if (index < 0 || index > this.#size) {
       return; 
@@ -179,13 +182,13 @@ class LinkedList {
 
     // 2. Handle insertion at the beginning (index 0) - delegate to prepend
     if (index === 0) {
-      this.prepend(value);
+      this.prepend(key, value);
       return;
     }
 
     // 3. Handle insertion at the end (index === size) - delegate to append
     if (index === this.#size) {
-      this.append(value);
+      this.append(key, value);
       return;
     }
 
@@ -202,7 +205,7 @@ class LinkedList {
     }
 
     // Create the new node, linking it to the node that was originally at `index`
-    const newNode = new Node(value, current);
+    const newNode = new Node(key, value, current);
 
     // Link the previous node to the new node
     if (previous) {
@@ -215,7 +218,7 @@ class LinkedList {
   /**
    * @method to remove the node at index
    * @param {number} index 
-   * @returns {any}
+   * @returns {string | null | undefined}
    * */
   removeAt(index){
     if(!this.#head)
@@ -229,7 +232,7 @@ class LinkedList {
       const prevNode = this.#head
       this.#head = this.#head.nextNode;
       this.#size--
-      return prevNode.value;
+      return prevNode.key;
     }
 
     if(index > 0){
@@ -244,7 +247,7 @@ class LinkedList {
       }
       previous.nextNode = current.nextNode;
       this.#size--
-      return current.value;
+      return current.key;
     }
 
   }
@@ -258,7 +261,7 @@ class LinkedList {
     let current = this.#head;
     let str = '';
     while (current !== null) {
-      str += `( ${current.value} ) -> `
+      str += `( ${current.key}:${current.value} ) -> `
       current = current.nextNode;
     }
     str += 'null'
