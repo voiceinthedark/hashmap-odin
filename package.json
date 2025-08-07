@@ -1,0 +1,15 @@
+{
+  "name": "hashmap",
+  "version": "0.0.1",
+  "description": "A hashmap implementation in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": ["hashmap", "javascript"],
+  "author": "voiceinthedark",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}
