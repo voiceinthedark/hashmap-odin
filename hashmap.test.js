@@ -51,4 +51,23 @@ describe('Hashmap tests', () => {
     });
   });
 
+  describe('has method', () => {
+    const hashmap = new Hashmap()
+    hashmap.set('kim', 45)
+    hashmap.set('jum', 37)
+    hashmap.set('tom', 'library')
+    hashmap.set('fat', 'tren')
+    hashmap.set('Mik', 39)
+    test('return true when key exists in the hashmap', () => {
+      expect(hashmap.has('kim')).toBeTruthy()
+      expect(hashmap.has('fat')).toBeTruthy()
+    });
+    test('return false when key does not exist in the hashmap', () => {
+      expect(hashmap.has('sam')).toBeFalsy()
+      expect(hashmap.has('eee')).toBeFalsy()
+    });
+    test('return false on empty input', () => {
+      expect(hashmap.has('')).toBeFalsy()
+    });
+  });
 });

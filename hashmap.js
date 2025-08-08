@@ -119,9 +119,12 @@ class Hashmap {
    * @returns {boolean}
    * */
   has(key) {
-
-    // TODO: Implement has method
-    return false
+    const hash = this.hash(key);
+    if(!this.#buckets[hash])
+      return false
+    if(!this.#buckets[hash].contains(key))
+      return false
+    return true
   }
 
   /**
