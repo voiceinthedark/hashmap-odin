@@ -148,8 +148,7 @@ class Hashmap {
    * @returns {number}
    * */
   length() {
-    // TODO: Implement the length method
-    return 0
+    return this.#size
   }
 
   /**

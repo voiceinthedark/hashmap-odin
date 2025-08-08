@@ -11,13 +11,13 @@ describe('Hashmap tests', () => {
       expect(hashmap.capacity).toBe(16);
     })
   });
-  describe('set methods', () => {
+  describe('testing the set methods', () => {
     test('set an item and increase the size of the hashmap', () => {
       const hashmap = new Hashmap()
       hashmap.set('jim', 22);
       expect(hashmap.size).toBe(1);
     });
-    test('setting more than 1 item', () =>{
+    test('setting more than 1 item', () => {
       const hashmap = new Hashmap()
       hashmap.set('jim', 44)
       hashmap.set('kim', 2)
@@ -33,7 +33,7 @@ describe('Hashmap tests', () => {
     });
   });
 
-  describe('get method', () => {
+  describe('testing the get method', () => {
     const hashmap = new Hashmap()
     hashmap.set('kim', 45)
     hashmap.set('jum', 37)
@@ -51,7 +51,7 @@ describe('Hashmap tests', () => {
     });
   });
 
-  describe('has method', () => {
+  describe('testing the has method', () => {
     const hashmap = new Hashmap()
     hashmap.set('kim', 45)
     hashmap.set('jum', 37)
@@ -71,15 +71,15 @@ describe('Hashmap tests', () => {
     });
   });
 
-  describe('remove method', () => {
-    
+  describe('testing the remove method', () => {
+
     const hashmap = new Hashmap()
     hashmap.set('kim', 45)
     hashmap.set('jum', 37)
     hashmap.set('tom', 'library')
     hashmap.set('fat', 'tren')
     hashmap.set('Mik', 39)
-    test('removing a key that exists should return true', () =>{
+    test('removing a key that exists should return true', () => {
       expect(hashmap.remove('kim')).toBeTruthy()
       expect(hashmap.size).toBe(4)
     })
@@ -90,5 +90,21 @@ describe('Hashmap tests', () => {
     test('removing an empty input', () => {
       expect(hashmap.remove()).toBeFalsy()
     })
+  });
+  describe('testing the length method', () => {
+    const hashmap = new Hashmap()
+    hashmap.set('kim', 45)
+    hashmap.set('jum', 37)
+    hashmap.set('tom', 'library')
+    hashmap.set('fat', 'tren')
+    hashmap.set('Mik', 39)
+
+    const emptymap = new Hashmap();
+    test('a list of 5 keys should return a length of 5', () => {
+      expect(hashmap.length()).toBe(5)
+    });
+    test('An empty hashmap should return 0 length', () => {
+      expect(emptymap.length()).toBe(0)
+    });
   });
 });
