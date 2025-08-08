@@ -32,4 +32,23 @@ describe('Hashmap tests', () => {
       expect(hashmap.size).toBe(2)
     });
   });
+
+  describe('get method', () => {
+    const hashmap = new Hashmap()
+    hashmap.set('kim', 45)
+    hashmap.set('jum', 37)
+    hashmap.set('tom', 'library')
+    hashmap.set('fat', 'tren')
+    hashmap.set('Mik', 39)
+    test('get the correct value by key', () => {
+      expect(hashmap.get('tom')).toBe('library')
+      expect(hashmap.get('jum')).toBe(37)
+      expect(hashmap.get('fat')).toBe('tren')
+    });
+
+    test('a non existant key should return null', () => {
+      expect(hashmap.get('god')).toBeNull()
+    });
+  });
+
 });

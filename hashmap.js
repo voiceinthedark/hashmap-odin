@@ -24,6 +24,10 @@ class Hashmap {
   }
 
   /**
+   * @typedef {LinkedList} #buckets[hash]
+   * */
+
+  /**
    * @method to return the capacity of the hashmap
    * @returns {number}
    * */
@@ -77,7 +81,6 @@ class Hashmap {
       this.#buckets[hash] = list
       this.#size++;
     } else if (this.#buckets[hash]) {
-      // TODO: consider duplicate keys operation
       if (this.#buckets[hash].contains(key)) {
         // update the key with the new value
         this.#buckets[hash].set(key, value);
@@ -94,8 +97,20 @@ class Hashmap {
    * @returns {any}
    * */
   get(key) {
-    // TODO: Implement get method
-
+    try {
+      if(!key){
+        throw new Error('Key cannot be empty')
+      }
+      const hash = this.hash(key);
+      console.log(`hash: ${hash}`)
+      console.log(`buckets of hash: ${this.#buckets[hash]}`)
+      if (!this.#buckets[hash])
+        return null;
+      const node = this.#buckets[hash].get(key);
+      return node.value
+    }catch(error){
+      console.error(error.message)
+    } 
   }
 
   /**

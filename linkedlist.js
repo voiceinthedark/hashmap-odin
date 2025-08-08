@@ -94,6 +94,26 @@ class LinkedList {
      current.value = val;
   }
 
+  /**
+   * @method to get the node value
+   * @param {string} key 
+   * @returns {Node |null | undefined}
+   * */
+  get(key){
+    // get the index of the node
+    let idx = this.find(key);
+    let current = this.#head
+    if(idx === 0){
+      return current;
+    }
+    let i = 0;
+    while(i < idx){
+      current = current?.nextNode
+      i++
+    }
+    return current;
+  }
+
   /** 
    * @method to get the node at the index
    * @param {number} index
