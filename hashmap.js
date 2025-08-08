@@ -133,9 +133,14 @@ class Hashmap {
    * @returns {boolean}
    * */
   remove(key) {
-    // TODO: Implement the remove method
-
-    return false
+    if(key === undefined || !this.has(key))
+      return false
+    // get the index of the key
+    const hash = this.hash(key)
+    let idx = this.#buckets[hash].find(key)
+    this.#buckets[hash].removeAt(idx)
+    this.#size--
+    return true
   }
 
   /**

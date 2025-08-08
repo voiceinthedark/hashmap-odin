@@ -70,4 +70,25 @@ describe('Hashmap tests', () => {
       expect(hashmap.has('')).toBeFalsy()
     });
   });
+
+  describe('remove method', () => {
+    
+    const hashmap = new Hashmap()
+    hashmap.set('kim', 45)
+    hashmap.set('jum', 37)
+    hashmap.set('tom', 'library')
+    hashmap.set('fat', 'tren')
+    hashmap.set('Mik', 39)
+    test('removing a key that exists should return true', () =>{
+      expect(hashmap.remove('kim')).toBeTruthy()
+      expect(hashmap.size).toBe(4)
+    })
+    test('removing a key that does not exist should return false', () => {
+      expect(hashmap.remove('sss')).toBeFalsy()
+      expect(hashmap.size).toBe(4)
+    });
+    test('removing an empty input', () => {
+      expect(hashmap.remove()).toBeFalsy()
+    })
+  });
 });
