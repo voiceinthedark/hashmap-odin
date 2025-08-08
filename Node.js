@@ -18,11 +18,13 @@ class Node {
    * @param {string} key 
    * @param {any} val 
    * @param {Node | null | undefined} next 
+   * @param {number} hash 
    * */
-  constructor(key, val, next) {
+  constructor(key, val, next, hash) {
     this.#key = key
     this.#value = val ?? null;
     this.#nextNode = next ?? null;
+    this.#hashKey = hash;
   }
 
   /**

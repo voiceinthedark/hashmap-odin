@@ -1,10 +1,11 @@
 // @ts-check
+import LinkedList from "./linkedlist.js"
 
 /**
  * @class Hashmap
  * @classdesc A hashmap class
  * */
-class Hashmap{
+class Hashmap {
   #capacity;
   #load_factor;
   #size;
@@ -15,7 +16,7 @@ class Hashmap{
    * @param {number} [capacity=16] 
    * @param {number} [load_factor=0.8] 
    * */
-  constructor(capacity = 16, load_factor = 0.8){
+  constructor(capacity = 16, load_factor = 0.8) {
     this.#capacity = capacity // starts at 16
     this.#load_factor = load_factor
     this.#size = 0 // initially at 0 size
@@ -26,7 +27,7 @@ class Hashmap{
    * @method to return the capacity of the hashmap
    * @returns {number}
    * */
-  get capacity(){
+  get capacity() {
     return this.#capacity
   }
 
@@ -34,7 +35,7 @@ class Hashmap{
    * @method to return the load factor of the hashmap (percentage to grow the hashmap)
    * @returns {number}
    * */
-  get load_factor(){
+  get load_factor() {
     return this.#load_factor
   }
 
@@ -42,7 +43,7 @@ class Hashmap{
    * @method to return the size of the hashmap
    * @returns {number}
    * */
-  get size(){
+  get size() {
     return this.#size
   }
 
@@ -50,10 +51,10 @@ class Hashmap{
    * @method to return the hash key
    * @param {string} key 
    * */
-  hash(key){
+  hash(key) {
     let hashCode = 0
     const primeNumber = 31;
-    for(let i = 0; i < key.length; i++){
+    for (let i = 0; i < key.length; i++) {
       hashCode = primeNumber * hashCode + key.charCodeAt(i)
       hashCode %= this.#capacity;
     }
@@ -65,11 +66,26 @@ class Hashmap{
    * @param {string} key 
    * @param {any} value 
    * */
-  set(key, value){
+  set(key, value) {
     // TODO: handle growth
     // Implement the set method
-
-
+    const hash = this.hash(key);
+    if (!this.#buckets[hash]) {
+      // bucket empty fill it with a linked list
+      const list = new LinkedList();
+      list.append(key, value, hash);
+      this.#buckets[hash] = list
+      this.#size++;
+    } else if (this.#buckets[hash]) {
+      // TODO: consider duplicate keys operation
+      if (this.#buckets[hash].contains(key)) {
+        // update the key with the new value
+        this.#buckets[hash].set(key, value);
+      } else {
+        this.#buckets[hash].append(key, value, hash);
+        this.#size++
+      }
+    }
   }
 
   /**
@@ -77,7 +93,7 @@ class Hashmap{
    * @param {string} key
    * @returns {any}
    * */
-  get(key){
+  get(key) {
     // TODO: Implement get method
 
   }
@@ -87,7 +103,7 @@ class Hashmap{
    * @param {string} key 
    * @returns {boolean}
    * */
-  has(key){
+  has(key) {
 
     // TODO: Implement has method
     return false
@@ -98,7 +114,7 @@ class Hashmap{
    * @param {string} key 
    * @returns {boolean}
    * */
-  remove(key){
+  remove(key) {
     // TODO: Implement the remove method
 
     return false
@@ -108,7 +124,7 @@ class Hashmap{
    * @method to return the length of the hashmap
    * @returns {number}
    * */
-  length(){
+  length() {
     // TODO: Implement the length method
     return 0
   }
@@ -116,7 +132,7 @@ class Hashmap{
   /**
    * @method to clear the hashmap of every element
    * */
-  clear(){
+  clear() {
     // TODO: Implement the clear method
   }
 
@@ -124,7 +140,7 @@ class Hashmap{
    * @method to return the keys of the hashmap as an array
    * @returns {Array<string>}
    * */
-  keys(){
+  keys() {
     // TODO: Implement the keys method
     return new Array();
   }
@@ -133,7 +149,7 @@ class Hashmap{
    * @method to return the values of the hashmap as an a array
    * @returns {Array}
    * */
-  values(){
+  values() {
     // TODO: Implement the values method
     return [];
   }
@@ -142,7 +158,7 @@ class Hashmap{
    * @method to return the entries of hashmap
    * @returns {Array}
    * */
-  entries(){
+  entries() {
     // TODO: implement the entries method
     return [];
   }

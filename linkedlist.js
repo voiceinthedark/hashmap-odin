@@ -41,9 +41,11 @@ class LinkedList {
   /**
      * @method to add a value to the front of the list
      * @param {string} key 
-     * @param {any} val  */
-  append(key, val) {
-    const newNode = new Node(key, val, null);
+     * @param {any} val
+     * @param {number} hash 
+     * */
+  append(key, val, hash) {
+    const newNode = new Node(key, val, null, hash);
     if (!this.#head) {
       this.#head = newNode;
       this.#tail = newNode;
@@ -62,15 +64,34 @@ class LinkedList {
    * @method to add a value to the front of the list
    * @param {string} key 
    * @param {any} val 
+   * @param {number} hash 
    * */
-  prepend(key, val) {
+  prepend(key, val, hash) {
     if (!this.#head) {
-      this.append(key, val);
+      this.append(key, val, hash);
     } else {
       const prevNode = this.#head;
-      this.#head = new Node(key, val, prevNode);
+      this.#head = new Node(key, val, prevNode, hash);
       this.#size++
     }
+  }
+
+  /**
+   * @method to set and update the key with a new value
+   * @param {string} key 
+   * @param {any} val 
+   * */
+  set(key, val){
+    // TODO: implement the set method in linkedlist
+    let idx = this.find(key);
+    let current = this.#head
+    let i = 0
+    while(i <= idx){
+      current = current?.nextNode;
+      i++
+    }
+    if(current)
+     current.value = val;
   }
 
   /** 
@@ -173,8 +194,9 @@ class LinkedList {
    * @param {string} key 
    * @param {any} value 
    * @param {number} index
+   * @param {number} hash 
    * */
-  insertAt(key, value, index) {
+  insertAt(key, value, index, hash) {
     // 1. Handle invalid index (negative or beyond the current size)
     if (index < 0 || index > this.#size) {
       return; 
@@ -182,13 +204,13 @@ class LinkedList {
 
     // 2. Handle insertion at the beginning (index 0) - delegate to prepend
     if (index === 0) {
-      this.prepend(key, value);
+      this.prepend(key, value, hash);
       return;
     }
 
     // 3. Handle insertion at the end (index === size) - delegate to append
     if (index === this.#size) {
-      this.append(key, value);
+      this.append(key, value, hash);
       return;
     }
 
@@ -205,7 +227,7 @@ class LinkedList {
     }
 
     // Create the new node, linking it to the node that was originally at `index`
-    const newNode = new Node(key, value, current);
+    const newNode = new Node(key, value, current, hash);
 
     // Link the previous node to the new node
     if (previous) {
