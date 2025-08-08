@@ -71,21 +71,37 @@ class Hashmap {
    * @param {any} value 
    * */
   set(key, value) {
-    // TODO: handle growth
+    if(this.#size >= this.#capacity * this.#load_factor){
+      console.log('capacity growth...')
+      const oldEntries = this.entries()
+      this.#capacity *= 2
+      this.#buckets = new Array(this.#capacity);
+      this.#size = 0;
+      // copy old hash into new hash
+      for(const [oldKey, oldValue] of oldEntries){
+        this.set(oldKey, oldValue)
+      }
+    }
     // Implement the set method
     const hash = this.hash(key);
     if (!this.#buckets[hash]) {
       // bucket empty fill it with a linked list
       const list = new LinkedList();
       list.append(key, value, hash);
+      // console.log('file: hashmap.js~line: 92~list', key, value, hash)
       this.#buckets[hash] = list
+      // console.log('file: hashmap.js~line: 94~buckets', this.#buckets[hash].toString())
       this.#size++;
     } else if (this.#buckets[hash]) {
       if (this.#buckets[hash].contains(key)) {
+        // TODO: fix the updating of the value
         // update the key with the new value
+        // console.log('inside hashmap set')
         this.#buckets[hash].set(key, value);
+        // console.log('file: hashmap.js~line: 102~buckets', this.#buckets[hash].toString())
       } else {
         this.#buckets[hash].append(key, value, hash);
+        // console.log('file: hashmap.js~line: 105~buckets', this.#buckets[hash].toString())
         this.#size++
       }
     }
@@ -102,12 +118,12 @@ class Hashmap {
         throw new Error('Key cannot be empty')
       }
       const hash = this.hash(key);
-      console.log(`hash: ${hash}`)
-      console.log(`buckets of hash: ${this.#buckets[hash]}`)
+      // console.log(`hash: ${hash}`)
+      // console.log(`buckets of hash: ${this.#buckets[hash]}`)
       if (!this.#buckets[hash])
         return null;
       const node = this.#buckets[hash].get(key);
-      return node.value
+      return node?.value
     } catch (error) {
       console.error(error.message)
     }
@@ -138,7 +154,11 @@ class Hashmap {
     // get the index of the key
     const hash = this.hash(key)
     let idx = this.#buckets[hash].find(key)
+    if(idx === null) return false
     this.#buckets[hash].removeAt(idx)
+    if(this.#buckets[hash].size === 0){
+      this.#buckets[hash] = null
+    }
     this.#size--
     return true
   }

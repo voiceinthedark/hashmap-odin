@@ -83,15 +83,24 @@ class LinkedList {
    * */
   set(key, val) {
     // TODO: implement the set method in linkedlist
-    let idx = this.find(key);
-    let current = this.#head
-    let i = 0
-    while (i <= idx) {
-      current = current?.nextNode;
-      i++
+    if (this.#head) {
+      let idx = this.find(key);
+      console.log(`index of key: ${key}, ${idx} - old val: ${this.at(idx)?.value} new val:${val}`)
+      if (idx === 0) {
+        this.#head.value = val;
+      } else {
+        let current = this.#head
+        let i = 1
+        while (i <= idx) {
+          current = current?.nextNode;
+          i++
+        }
+        if (current)
+          current.value = val;
+      }
+
     }
-    if (current)
-      current.value = val;
+
   }
 
   /**
@@ -178,7 +187,7 @@ class LinkedList {
       this.#currentNode = this.#head
       if (this.#currentNode) {
         while (this.#currentNode !== null) {
-          console.log(`node: ${this.#currentNode?.value}`)
+          // console.log(`node: ${this.#currentNode?.value}`)
           if (this.#currentNode?.key === key) {
             return true
           }

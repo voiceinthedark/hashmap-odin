@@ -168,7 +168,7 @@ describe('Hashmap tests', () => {
     });
   });
   describe('testing the entries method', () => {
-    
+
     let hashmap;
     beforeEach(() => {
       hashmap = new Hashmap();
@@ -188,4 +188,43 @@ describe('Hashmap tests', () => {
       expect(hashmap.entries()[0]).toHaveLength(2);
     });
   })
+
+  describe('testing capacity growth', () => {
+
+    let hmap;
+    beforeEach(() => {
+      hmap = new Hashmap(16, 0.75)
+
+      hmap.set('apple', 'red')
+      hmap.set('banana', 'yellow')
+      hmap.set('carrot', 'orange')
+      hmap.set('dog', 'brown')
+      hmap.set('elephant', 'gray')
+      hmap.set('frog', 'green')
+      hmap.set('grape', 'purple')
+      hmap.set('hat', 'black')
+      hmap.set('ice cream', 'white')
+      hmap.set('jacket', 'blue')
+      hmap.set('kite', 'pink')
+      hmap.set('lion', 'golden')
+    });
+
+    test('size before growth', () => {
+      expect(hmap.size).toBe(12)
+    });
+    test('capacity before growth', () => {
+      expect(hmap.capacity).toBe(16);
+    });
+    test('setting an extra element will double the capacity but size will be added by 1', () => {
+      hmap.set('moon', 'silver');
+      expect(hmap.capacity).toBe(32)
+      expect(hmap.size).toBe(13)
+      expect(hmap.get('moon')).toBe('silver')
+    })
+    test('All elements remain after growth', () => {
+      hmap.set('moon', 'silver');
+      expect(hmap.get('hat')).toBe('black')
+      expect(hmap.get('moon')).toBe('silver')
+    })
+  });
 });
