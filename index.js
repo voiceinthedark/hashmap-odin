@@ -11,4 +11,8 @@ hashmap.set('Mik', 39)
 console.log(hashmap.get('kim'))
 console.log(hashmap.get('tom'))
 console.log(hashmap.get('fat'))
-console.log(hashmap.get())
+console.log(hashmap.length())
+hashmap.remove('jum')
+console.log(hashmap.length()) // 4
+
+console.log(hashmap.keys())

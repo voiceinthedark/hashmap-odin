@@ -6,7 +6,7 @@ import LinkedList from "./linkedlist.js"
  * @classdesc A hashmap class
  * */
 class Hashmap {
-  #capacity;
+  #capacity = 16;
   #load_factor;
   #size;
   #buckets; // the buckets of the hashmap
@@ -155,7 +155,8 @@ class Hashmap {
    * @method to clear the hashmap of every element
    * */
   clear() {
-    // TODO: Implement the clear method
+    this.#buckets = new Array(this.#capacity)
+    this.#size = 0
   }
 
   /**
@@ -163,8 +164,14 @@ class Hashmap {
    * @returns {Array<string>}
    * */
   keys() {
-    // TODO: Implement the keys method
-    return new Array();
+    let array = []
+    for(let i = 0; i < this.#capacity; i++){
+      if(this.#buckets[i]){
+        array.push(this.#buckets[i].keys())
+      }
+    }
+    // flatten the arrays
+    return array.flat(2);
   }
 
   /**

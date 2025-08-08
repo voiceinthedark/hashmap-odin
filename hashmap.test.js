@@ -107,4 +107,64 @@ describe('Hashmap tests', () => {
       expect(emptymap.length()).toBe(0)
     });
   });
+  describe('testing the clear method', () => {
+    let hashmap;
+
+    beforeEach(() => {
+      hashmap = new Hashmap();
+      hashmap.set('kim', 45);
+      hashmap.set('jum', 37);
+      hashmap.set('tom', 'library');
+      hashmap.set('fat', 'tren');
+      hashmap.set('Mik', 39);
+    });
+
+    test('full list should return a list of 5', () => {
+      expect(hashmap.length()).toBe(5)
+    });
+    test('After clearing the hashmap should return a length of 0', () => {
+      expect(hashmap.length()).toBe(5)
+      hashmap.clear()
+      expect(hashmap.length()).toBe(0)
+      expect(hashmap.has('kim')).toBeFalsy()
+    });
+  });
+  describe('testing the keys method', () => {
+    let hashmap;
+    beforeEach(() => {
+      hashmap = new Hashmap();
+      hashmap.set('kim', 45);
+      hashmap.set('jum', 37);
+      hashmap.set('tom', 'library');
+      hashmap.set('fat', 'tren');
+      hashmap.set('Mik', 39);
+    });
+    test('a list of 5 items should return an array of size 5', () => {
+      expect(hashmap.keys().length).toBe(5)
+    })
+    test('keys array should contain the kim key', () => {
+      expect(hashmap.keys().findIndex((c) => c === 'kim')).toBeGreaterThanOrEqual(0)
+    })
+  })
+
+  describe('testing the values method', () => {
+    let hashmap;
+    beforeEach(() => {
+      hashmap = new Hashmap();
+      hashmap.set('kim', 45);
+      hashmap.set('jum', 37);
+      hashmap.set('tom', 'library');
+      hashmap.set('fat', 'tren');
+      hashmap.set('Mik', 39);
+    });
+    test('A list of 5 items should return an array of 5', () => {
+      expect(hashmap.values()).toBe(5)
+    });
+    test('values array should contain the value "library"', () => {
+      expect(hashmap.values().findIndex(n => n === 'library')).toBeGreaterThanOrEqual(0)
+    });
+    test('A non existant value should return a negative number', () => {
+      expect(hashmap.values().findIndex(n => n === 1)).toBeLessThan(0)
+    });
+  });
 });

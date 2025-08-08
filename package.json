@@ -1,6 +1,6 @@
 {
   "name": "hashmap",
-  "version": "0.0.19",
+  "version": "0.0.32",
   "description": "A hashmap implementation in javascript",
   "main": "index.js",
   "scripts": {

@@ -81,17 +81,17 @@ class LinkedList {
    * @param {string} key 
    * @param {any} val 
    * */
-  set(key, val){
+  set(key, val) {
     // TODO: implement the set method in linkedlist
     let idx = this.find(key);
     let current = this.#head
     let i = 0
-    while(i <= idx){
+    while (i <= idx) {
       current = current?.nextNode;
       i++
     }
-    if(current)
-     current.value = val;
+    if (current)
+      current.value = val;
   }
 
   /**
@@ -99,15 +99,15 @@ class LinkedList {
    * @param {string} key 
    * @returns {Node |null | undefined}
    * */
-  get(key){
+  get(key) {
     // get the index of the node
     let idx = this.find(key);
     let current = this.#head
-    if(idx === 0){
+    if (idx === 0) {
       return current;
     }
     let i = 0;
-    while(i < idx){
+    while (i < idx) {
       current = current?.nextNode
       i++
     }
@@ -219,7 +219,7 @@ class LinkedList {
   insertAt(key, value, index, hash) {
     // 1. Handle invalid index (negative or beyond the current size)
     if (index < 0 || index > this.#size) {
-      return; 
+      return;
     }
 
     // 2. Handle insertion at the beginning (index 0) - delegate to prepend
@@ -262,27 +262,27 @@ class LinkedList {
    * @param {number} index 
    * @returns {string | null | undefined}
    * */
-  removeAt(index){
-    if(!this.#head)
+  removeAt(index) {
+    if (!this.#head)
       return null
 
-    if(index < 0 || index > this.#size){
+    if (index < 0 || index > this.#size) {
       return null
     }
 
-    if(index === 0){
+    if (index === 0) {
       const prevNode = this.#head
       this.#head = this.#head.nextNode;
       this.#size--
       return prevNode.key;
     }
 
-    if(index > 0){
+    if (index > 0) {
       // get the previous to last node
       let current = this.#head
       let previous = null;
       let i = 0
-      while(i < index){
+      while (i < index) {
         previous = current;
         current = current.nextNode;
         i++
@@ -292,6 +292,23 @@ class LinkedList {
       return current.key;
     }
 
+  }
+
+  /**
+   * @method to return the keys in the nodelist
+   * @returns {Array}
+   * */
+  keys() {
+    let array = [];
+    if (this.#head) {
+      let current = this.#head
+      array.push(current?.key);
+      while(current.nextNode != null){
+        current = current.nextNode
+        array.push(current.key)
+      }
+    }
+    return array
   }
 
   /**
