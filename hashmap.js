@@ -98,7 +98,7 @@ class Hashmap {
    * */
   get(key) {
     try {
-      if(!key){
+      if (!key) {
         throw new Error('Key cannot be empty')
       }
       const hash = this.hash(key);
@@ -108,9 +108,9 @@ class Hashmap {
         return null;
       const node = this.#buckets[hash].get(key);
       return node.value
-    }catch(error){
+    } catch (error) {
       console.error(error.message)
-    } 
+    }
   }
 
   /**
@@ -120,9 +120,9 @@ class Hashmap {
    * */
   has(key) {
     const hash = this.hash(key);
-    if(!this.#buckets[hash])
+    if (!this.#buckets[hash])
       return false
-    if(!this.#buckets[hash].contains(key))
+    if (!this.#buckets[hash].contains(key))
       return false
     return true
   }
@@ -133,7 +133,7 @@ class Hashmap {
    * @returns {boolean}
    * */
   remove(key) {
-    if(key === undefined || !this.has(key))
+    if (key === undefined || !this.has(key))
       return false
     // get the index of the key
     const hash = this.hash(key)
@@ -165,8 +165,8 @@ class Hashmap {
    * */
   keys() {
     let array = []
-    for(let i = 0; i < this.#capacity; i++){
-      if(this.#buckets[i]){
+    for (let i = 0; i < this.#capacity; i++) {
+      if (this.#buckets[i]) {
         array.push(this.#buckets[i].keys())
       }
     }
@@ -180,7 +180,13 @@ class Hashmap {
    * */
   values() {
     // TODO: Implement the values method
-    return [];
+    let array = []
+    for (let i = 0; i < this.#capacity; i++) {
+      if (this.#buckets[i]) {
+        array.push(this.#buckets[i].values())
+      }
+    }
+    return array.flat(2);
   }
 
   /**

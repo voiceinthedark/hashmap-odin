@@ -303,9 +303,26 @@ class LinkedList {
     if (this.#head) {
       let current = this.#head
       array.push(current?.key);
-      while(current.nextNode != null){
+      while (current.nextNode != null) {
         current = current.nextNode
         array.push(current.key)
+      }
+    }
+    return array
+  }
+
+  /**
+   * @method to return the values of each node
+   * @returns {Array}
+   * */
+  values() {
+    let array = []
+    if (this.#head) {
+      let current = this.#head;
+      array.push(current?.value);
+      while (current.nextNode != null) {
+        current = current.nextNode
+        array.push(current.value)
       }
     }
     return array

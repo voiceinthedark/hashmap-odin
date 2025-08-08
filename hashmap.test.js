@@ -158,7 +158,7 @@ describe('Hashmap tests', () => {
       hashmap.set('Mik', 39);
     });
     test('A list of 5 items should return an array of 5', () => {
-      expect(hashmap.values()).toBe(5)
+      expect(hashmap.values().length).toBe(5)
     });
     test('values array should contain the value "library"', () => {
       expect(hashmap.values().findIndex(n => n === 'library')).toBeGreaterThanOrEqual(0)
