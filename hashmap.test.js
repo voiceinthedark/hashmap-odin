@@ -167,4 +167,25 @@ describe('Hashmap tests', () => {
       expect(hashmap.values().findIndex(n => n === 1)).toBeLessThan(0)
     });
   });
+  describe('testing the entries method', () => {
+    
+    let hashmap;
+    beforeEach(() => {
+      hashmap = new Hashmap();
+      hashmap.set('kim', 45);
+      hashmap.set('jum', 37);
+      hashmap.set('tom', 'library');
+      hashmap.set('fat', 'tren');
+      hashmap.set('Mik', 39);
+    });
+    test('entries should have a length of 5', () => {
+      expect(hashmap.entries()).toHaveLength(5)
+    });
+    test('entries items must be arrays', () => {
+      expect(hashmap.entries()[0]).toBeInstanceOf(Array)
+    });
+    test('entries sub items arrays, should have a length of 2', () => {
+      expect(hashmap.entries()[0]).toHaveLength(2);
+    });
+  })
 });

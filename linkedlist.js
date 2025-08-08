@@ -329,6 +329,23 @@ class LinkedList {
   }
 
   /**
+   * @method to return an array of entries
+   * @returns {Array}
+   * */
+  entries() {
+    let array = []
+    if (this.#head) {
+      let current = this.#head;
+      array.push([current.key, current?.value]);
+      while (current.nextNode != null) {
+        current = current.nextNode
+        array.push([current.key, current?.value])
+      }
+    }
+    return array
+  }
+
+  /**
    * @method to return a string representation of the linked list
    * */
   toString() {

@@ -16,3 +16,4 @@ hashmap.remove('jum')
 console.log(hashmap.length()) // 4
 
 console.log(hashmap.keys())
+console.log(hashmap.entries())

@@ -179,7 +179,6 @@ class Hashmap {
    * @returns {Array}
    * */
   values() {
-    // TODO: Implement the values method
     let array = []
     for (let i = 0; i < this.#capacity; i++) {
       if (this.#buckets[i]) {
@@ -194,8 +193,13 @@ class Hashmap {
    * @returns {Array}
    * */
   entries() {
-    // TODO: implement the entries method
-    return [];
+    let array =  []
+    for (let i = 0; i < this.#capacity; i++) {
+      if (this.#buckets[i]) {
+        array.push(this.#buckets[i].entries())
+      }
+    }
+    return array.flat(1);
   }
 }
 
